@@ -32,6 +32,8 @@ pnpm install e2e-brikl-api
 2. initiale instant and call functions with operation name
 
 ```
+import BriklGraphQL from 'e2e-brikl-api'
+
 const apiInstant = new BriklGraphQL(nbeShopId);
 
 // call NBE
