@@ -1,11 +1,15 @@
 import * as NBEQuery from './graphqlSource/new-backend/query.json';
 import * as OBEQuery from './graphqlSource/old-backend/query.json';
-import * as SFQueryy from './graphqlSource/storefront/query.json';
+import * as SFQuery from './graphqlSource/storefront/query.json';
 import fetch from 'node-fetch';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-export default class BriklGraphQL {
+type NBEQueryOptions = keyof typeof NBEQuery;
+type OBEQueryOptions = keyof typeof OBEQuery;
+type SFQueryOptions = keyof typeof SFQuery;
+
+export class BriklGraphQL {
   readonly shopID: string;
   protected apiToken: null | string;
   readonly obeDevEndpoint: string;
@@ -66,7 +70,7 @@ export default class BriklGraphQL {
    * @remarks
    * This method is calling API to https://dev.internal-api.brikl.com/v1/graphql
    */
-  async requestGrapQLNBE(operationName: string, variables?: {}) {
+  async requestGrapQLNBE(operationName: NBEQueryOptions, variables?: {}) {
     return await this.baseRequestGraphQl(this.nbeDevEndpoint, operationName, NBEQuery[operationName], variables);
   }
 
@@ -74,7 +78,7 @@ export default class BriklGraphQL {
    * @remarks
    * This method is calling API to https://dev.api.mybrikl.com/graphql
    */
-  async requestGrapQLOBE(operationName: string, variables?: {}) {
+  async requestGrapQLOBE(operationName: OBEQueryOptions, variables?: {}) {
     return await this.baseRequestGraphQl(this.obeDevEndpoint, operationName, OBEQuery[operationName], variables);
   }
 
@@ -82,7 +86,7 @@ export default class BriklGraphQL {
    * @remarks
    * This method is calling API to https://dev.internal-api.brikl.com/graphql/storefront/internal
    */
-  async requestGrapQLSF(operationName: string, variables?: {}) {
-    return await this.baseRequestGraphQl(this.storeFrontEndPoint, operationName, SFQueryy[operationName], variables);
+  async requestGrapQLSF(operationName: SFQueryOptions, variables?: {}) {
+    return await this.baseRequestGraphQl(this.storeFrontEndPoint, operationName, SFQuery[operationName], variables);
   }
 }
