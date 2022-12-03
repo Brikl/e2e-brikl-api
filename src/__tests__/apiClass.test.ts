@@ -1,4 +1,4 @@
-import BriklGraphQL from '../index';
+import { BriklGraphQL } from '../index';
 
 const nbeShopId = '3ddd1f77-23b5-4bc7-9059-c32cc1338723';
 const apiInstant = new BriklGraphQL(nbeShopId);
